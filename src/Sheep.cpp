@@ -7,6 +7,7 @@ Sheep::Sheep(const sf::Vector2f& position) {
     _sprite.setTexture(_texture, true);
     _sprite.setOrigin(sf::Vector2f(size.x / 2, size.y / 2));
     _sprite.setPosition(position);
+    _facingRight = false;
 }
 
 Sheep::~Sheep() {
@@ -49,6 +50,19 @@ void Sheep::update(const sf::Vector2f& avoidLocation, const sf::Vector2f& attrac
     // Sum the repel and attract offsets to get the final move offset.
     sf::Vector2f moveOffset = repelOffset + attractOffset;
     _sprite.move(moveOffset);
+
+    // Determine facing direction. Flip the sprite if there was a change in facing direction.
+    const sf::Vector2f flipVector(-1, 1);
+    if (moveOffset.x > 0) {
+        if (!_facingRight)
+            _sprite.scale(flipVector);
+        _facingRight = true;
+    }
+    if (moveOffset.x < 0) {
+        if (_facingRight)
+            _sprite.scale(flipVector);
+        _facingRight = false;
+    }
 }
 
 void Sheep::draw(sf::RenderWindow* const window) {

@@ -9,7 +9,7 @@ class Sheep {
 private:
     sf::Texture _texture;
     sf::Sprite _sprite;
-
+    bool _facingRight;
 public:
     Sheep(const sf::Vector2f& position);
     ~Sheep();

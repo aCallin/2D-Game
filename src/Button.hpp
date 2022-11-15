@@ -21,8 +21,28 @@ private:
     bool _isPressed;
     bool _wasClicked;
 
+    /**
+     * @brief Returns whether the button is currently being hovered over by the mouse.
+     * 
+     * @param window mouse coordinates relative to which RenderWindow?
+     * @return true if the button is currently being hovered over, false otherwise
+     */
     bool checkIsHoveredOver(const sf::RenderWindow& window);
+
+    /**
+     * @brief Returns whether the button is currently being pressed. Basically, is the button hovered over and is the 
+     * left mouse button pressed?
+     * 
+     * @return true if the button is currently being pressed, false otherwise
+     */
     bool checkIsPressed();
+
+    /**
+     * @brief Set the texture to be displayed when draw() is called. If the sprite's current texture and the texture 
+     * parameter are the same object, no action is taken.
+     * 
+     * @param texture the sprite texture
+     */
     void setSpriteTexture(const sf::Texture& texture);
 public:
     /**

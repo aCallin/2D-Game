@@ -5,12 +5,14 @@
 #include <limits>
 #include "Scene.hpp"
 #include "Player.hpp"
-#include "Sheep.hpp"
+#include "PlayerController.hpp"
+#include "PlayerDrawer.hpp"
 
 class PlayingScene : public Scene {
 private:
-    Player player;
-    std::vector<Sheep*> sheep;
+    Player _player;
+    PlayerController _playerController;
+    PlayerDrawer _playerDrawer;
 public:
     PlayingScene();
     virtual ~PlayingScene() override;

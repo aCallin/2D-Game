@@ -2,24 +2,28 @@
 #define PLAYER_HPP
 
 #include <SFML\Graphics.hpp>
-#include <string.h>
-#include <math.h>
-#include "Engine.hpp"
+
+enum FacingDirection { left, right };
 
 class Player {
 private:
+    int _health;
     sf::Texture _texture;
     sf::Sprite _sprite;
-    bool _facingRight;
-
+    FacingDirection _facingDirection;
 public:
-    Player();
-    ~Player();
+    Player() = default;
+    ~Player() = default;
 
-    void update();
-    void draw(sf::RenderWindow* const window);
-
-    const sf::Vector2f& getCenter() const;
+    const int& getHealth() const;
+    sf::Texture* const getTexture();
+    sf::Sprite* const getSprite();
+    const sf::Vector2f& getPosition() const;
+    const FacingDirection& getFacingDirection() const;
+    
+    void setHealth(const int& health);
+    void setPosition(const sf::Vector2f& position);
+    void setFacingDirection(const FacingDirection& facingDirection);
 };
 
 #endif

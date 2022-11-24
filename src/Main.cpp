@@ -6,7 +6,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Hello, world!" << std::endl;
 
     Engine* const engine = Engine::getInstance();
-    engine->setScene(new PlayingScene());
+    engine->setScene(new MainMenuScene());
     engine->doGameLoop();
     delete engine;
     

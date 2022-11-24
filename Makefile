@@ -7,9 +7,10 @@ SRC = src/Main.cpp\
 	  src/Button.cpp\
 	  src/MainMenuScene.cpp\
 	  src/OptionsScene.cpp\
-	  src/PlayingScene.cpp\
 	  src/Player.cpp\
-	  src/Sheep.cpp
+	  src/PlayerController.cpp\
+	  src/PlayerDrawer.cpp\
+	  src/PlayingScene.cpp
 OBJ = $(patsubst src/%.cpp,obj/%.o,$(SRC))
 
 INCLUDES = -I"SFML-2.5.1/include"

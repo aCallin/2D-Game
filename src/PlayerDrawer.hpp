@@ -13,7 +13,6 @@ public:
 
     void setPlayer(Player* const player);
 
-    void update();
     void draw(sf::RenderWindow* const window);
 };
 

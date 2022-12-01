@@ -1,15 +1,15 @@
-#ifndef INTERACTION_DEMO_SCENE_HPP
-#define INTERACTION_DEMO_SCENE_HPP
+#ifndef PLAYING_SCENE_HPP
+#define PLAYING_SCENE_HPP
 
-#include <vector>
-#include <limits>
 #include "Scene.hpp"
+#include "Terrain.hpp"
 #include "Player.hpp"
 #include "PlayerController.hpp"
 #include "PlayerDrawer.hpp"
 
 class PlayingScene : public Scene {
 private:
+    Terrain _terrain;
     Player _player;
     PlayerController _playerController;
     PlayerDrawer _playerDrawer;

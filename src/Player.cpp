@@ -1,33 +1,21 @@
 #include "Player.hpp"
 
-const int& Player::getHealth() const {
-    return _health;
+Player::Player() {
+    const float radius = 50.0f;
+    _circle.setPosition(sf::Vector2f(0, 0));
+    _circle.setRadius(radius);
+    _circle.setOrigin(sf::Vector2f(radius, radius));
+    _circle.setFillColor(sf::Color::Green);
 }
 
-sf::Texture* const Player::getTexture() {
-    return &_texture;
-}
-
-sf::Sprite* const Player::getSprite() {
-    return &_sprite;
+const sf::CircleShape& Player::getCircle() const {
+    return _circle;
 }
 
 const sf::Vector2f& Player::getPosition() const {
-    return _sprite.getPosition();
-}
-
-const FacingDirection& Player::getFacingDirection() const {
-    return _facingDirection;
-}
-
-void Player::setHealth(const int& health) {
-    _health = health;
+    return _circle.getPosition();
 }
 
 void Player::setPosition(const sf::Vector2f& position) {
-    _sprite.setPosition(position);
-}
-
-void Player::setFacingDirection(const FacingDirection& facingDirection) {
-    _facingDirection = facingDirection;
+    _circle.setPosition(position);
 }

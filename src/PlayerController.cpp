@@ -27,12 +27,6 @@ void PlayerController::update() {
     const float moveSpeed = 5.0f;
     sf::Vector2f moveOffset(moveDirectionNormalized.x * moveSpeed, moveDirectionNormalized.y * moveSpeed);
 
-    // Determine facing direction.
-    if (moveOffset.x > 0)
-        _player->setFacingDirection(FacingDirection::right);
-    if (moveOffset.x < 0)
-        _player->setFacingDirection(FacingDirection::left);
-
     // Apply movement.
     _player->setPosition(_player->getPosition() + moveOffset);
 }

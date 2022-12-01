@@ -1,19 +1,16 @@
 #include "MainMenuScene.hpp"
 
 MainMenuScene::MainMenuScene() {
-    // Load in the button textures.
-    const std::string newGameTexturePath = "res/textures/new-game.png";
-    const std::string optionsTexturePath = "res/textures/options.png";
-    const std::string quitTexturePath = "res/textures/quit.png";
-    newGameButton.setTexturePaths(newGameTexturePath, newGameTexturePath, newGameTexturePath);
-    optionsButton.setTexturePaths(optionsTexturePath, optionsTexturePath, optionsTexturePath);
-    quitButton.setTexturePaths(quitTexturePath, quitTexturePath, quitTexturePath);
+    _engine->getResourceManager()->addTexture("button_new_game.png", "button_new_game");
+    _engine->getResourceManager()->addTexture("button_options.png", "button_options");
+    _engine->getResourceManager()->addTexture("button_quit.png", "button_quit");
 
-    // Scale the buttons.
-    const sf::Vector2f scaleFactors(0.5, 0.5);
-    newGameButton.setScale(scaleFactors);
-    optionsButton.setScale(scaleFactors);
-    quitButton.setScale(scaleFactors);
+    const sf::Texture& newGameTexture = *_engine->getResourceManager()->getTexture("button_new_game");
+    const sf::Texture& optionsTexture = *_engine->getResourceManager()->getTexture("button_options");
+    const sf::Texture& quitTexture = *_engine->getResourceManager()->getTexture("button_quit");
+    newGameButton.setTextures(newGameTexture, newGameTexture, newGameTexture);
+    optionsButton.setTextures(optionsTexture, optionsTexture, optionsTexture);
+    quitButton.setTextures(quitTexture, quitTexture, quitTexture);
 
     // Position the buttons.
     sf::Vector2f buttonPosition(50, 130);
@@ -26,7 +23,9 @@ MainMenuScene::MainMenuScene() {
 }
 
 MainMenuScene::~MainMenuScene() {
-    
+    _engine->getResourceManager()->removeTexture("button_new_game");
+    _engine->getResourceManager()->removeTexture("button_options");
+    _engine->getResourceManager()->removeTexture("button_quit");
 }
 
 void MainMenuScene::update() {
@@ -41,7 +40,7 @@ void MainMenuScene::update() {
     if (optionsButton.wasClicked())
         _engine->setScene(new OptionsScene());
     if (quitButton.wasClicked())
-        _engine->getWindow()->close(); // Trying to mimic sf::Event::Closed.
+        _engine->getWindow()->close();
 }
 
 void MainMenuScene::draw() {

@@ -24,11 +24,11 @@ void Button::update(const sf::RenderWindow& window) {
 
     // Set the current texture.
     if (_isPressed)
-        setSpriteTexture(_pressedTexture);
+        setSpriteTexture(*_pressedTexture);
     else if (_isHoveredOver)
-        setSpriteTexture(_hoveredTexture);
+        setSpriteTexture(*_hoveredTexture);
     else
-        setSpriteTexture(_defaultTexture);
+        setSpriteTexture(*_defaultTexture);
 }
 
 void Button::draw(sf::RenderWindow* const window) {
@@ -41,7 +41,7 @@ bool Button::wasClicked() const {
 }
 
 sf::Vector2f Button::getSize() const {
-    sf::FloatRect globalBounds = _sprite.getGlobalBounds();
+    sf::FloatRect globalBounds = _sprite.getLocalBounds();
     return sf::Vector2f(globalBounds.width, globalBounds.height);
 }
 
@@ -49,24 +49,18 @@ const sf::Vector2f& Button::getPosition() const {
     return _sprite.getPosition();
 }
 
-void Button::setTexturePaths(std::string defaultTexturePath, 
-                             std::string hoveredTexturePath, 
-                             std::string pressedTexturePath) {
-    _defaultTexture.loadFromFile(defaultTexturePath);
-    _hoveredTexture.loadFromFile(hoveredTexturePath);
-    _pressedTexture.loadFromFile(pressedTexturePath);
-    _sprite.setTexture(_defaultTexture);
+void Button::setTextures(const sf::Texture& defaultTexture, 
+                         const sf::Texture& hoveredTexture, 
+                         const sf::Texture& pressedTexture) {
+    _defaultTexture = &defaultTexture;
+    _hoveredTexture = &hoveredTexture;
+    _pressedTexture = &pressedTexture;
+    _sprite.setTexture(*_defaultTexture);
 }
 
 void Button::setPosition(const sf::Vector2f& position) {
     _sprite.setPosition(position);
 }
-
-void Button::setScale(const sf::Vector2f& scaleFactors) {
-    _sprite.setScale(scaleFactors);
-}
-
-///// PRIVATE FUNCTIONS /////
 
 bool Button::checkIsHoveredOver(const sf::RenderWindow& window) {
     sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));

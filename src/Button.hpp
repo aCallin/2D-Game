@@ -11,9 +11,9 @@
  */
 class Button {
 private:
-    sf::Texture _defaultTexture;
-    sf::Texture _hoveredTexture;
-    sf::Texture _pressedTexture;
+    const sf::Texture* _defaultTexture;
+    const sf::Texture* _hoveredTexture;
+    const sf::Texture* _pressedTexture;
     sf::Sprite _sprite;
     bool _wasEntered;
     bool _isHoveredOver;
@@ -80,7 +80,7 @@ public:
     bool wasClicked() const;
 
     /**
-     * @brief Get the size of the button, accounting for transformations applied to the button.
+     * @brief Get the size of the button.
      * 
      * @return sf::Vector2f the size of the button
      */
@@ -98,13 +98,13 @@ public:
      * pressed texture is drawn when the button is pressed, hovered when the button is hovered over but not pressed, 
      * and default otherwise.
      * 
-     * @param defaultTexturePath where to find the button's default texture
-     * @param hoveredTexturePath where to find the button's hovered texture
-     * @param pressedTexturePath where to find the button's pressed texture
+     * @param defaultTexture the button's default texture
+     * @param hoveredTexture the button's hovered texture
+     * @param pressedTexture the button's pressed texture
      */
-    void setTexturePaths(std::string defaultTexturePath, 
-                         std::string hoveredTexturePath, 
-                         std::string pressedTexturePath);
+    void setTextures(const sf::Texture& defaultTexture, 
+                     const sf::Texture& hoveredTexture, 
+                     const sf::Texture& pressedTexture);
 
     /**
      * @brief Set the position of the button.
@@ -112,13 +112,6 @@ public:
      * @param position the position of the button
      */
     void setPosition(const sf::Vector2f& position);
-
-    /**
-     * @brief Set the scale of the button.
-     * 
-     * @param scaleFactors the x and y scale factors
-     */
-    void setScale(const sf::Vector2f& scaleFactors);
 };
 
 #endif

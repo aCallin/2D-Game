@@ -9,7 +9,7 @@ class Scene;
 class Engine {
 private:
     static Engine* _engine;
-    sf::RenderWindow* _window;
+    sf::RenderWindow _window;
     Scene* _scene;
 
     Engine();
@@ -30,7 +30,7 @@ public:
     Engine(const Engine& other) = delete;
     Engine operator=(const Engine& other) = delete;
 
-    sf::RenderWindow* const getWindow() const;
+    sf::RenderWindow* const getWindow();
     void setScene(Scene* scene);
 
     void doGameLoop();

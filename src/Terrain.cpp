@@ -1,9 +1,14 @@
 #include "Terrain.hpp"
 
-Terrain::Terrain() {
-    _tileTexture.loadFromFile("res/textures/terrain_tile.png");
-    _tileSize = _tileTexture.getSize();
-    _tileSprite.setTexture(_tileTexture, true);
+void Terrain::load(ResourceManager* const resourceManager) {
+    resourceManager->addTexture("terrain_tile.png", "terrain_tile");
+    _tileTexture = resourceManager->getTexture("terrain_tile");
+    _tileSize = _tileTexture->getSize();
+    _tileSprite.setTexture(*_tileTexture, true);
+}
+
+void Terrain::deload(ResourceManager* const resourceManager) {
+    resourceManager->removeTexture("terrain_tile");
 }
 
 void Terrain::update(const sf::Vector2f& cameraCenter, const sf::Vector2u& internalResolution) {

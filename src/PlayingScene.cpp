@@ -1,12 +1,14 @@
 #include "PlayingScene.hpp"
 
 PlayingScene::PlayingScene() {
+    _terrain.load(_engine->getResourceManager());
+
     _playerController.setPlayer(&_player);
     _playerDrawer.setPlayer(&_player);
 }
 
 PlayingScene::~PlayingScene() {
-
+    _terrain.deload(_engine->getResourceManager());
 }
 
 void PlayingScene::update() {

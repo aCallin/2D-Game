@@ -3,6 +3,7 @@
 
 #include <SFML\Graphics.hpp>
 #include "Scene.hpp"
+#include "ResourceManager.hpp"
 
 class Scene;
 
@@ -11,6 +12,7 @@ private:
     static Engine* _engine;
     sf::RenderWindow _window;
     Scene* _scene;
+    ResourceManager _resourceManager;
 
     Engine();
 
@@ -31,6 +33,7 @@ public:
     Engine operator=(const Engine& other) = delete;
 
     sf::RenderWindow* const getWindow();
+    ResourceManager* const getResourceManager();
     void setScene(Scene* scene);
 
     void doGameLoop();

@@ -4,14 +4,15 @@ EXEC = Game.exe
 SRC = src/Main.cpp\
 	  src/Engine.cpp\
 	  src/Scene.cpp\
-	  src/Button.cpp\
+	  src/ResourceManager.cpp\
 	  src/MainMenuScene.cpp\
 	  src/OptionsScene.cpp\
 	  src/Player.cpp\
 	  src/PlayerController.cpp\
 	  src/PlayerDrawer.cpp\
 	  src/PlayingScene.cpp\
-	  src/Terrain.cpp
+	  src/Terrain.cpp\
+	  src/Button.cpp
 OBJ = $(patsubst src/%.cpp,obj/%.o,$(SRC))
 
 INCLUDES = -I"SFML-2.5.1/include"

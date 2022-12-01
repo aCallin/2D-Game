@@ -28,6 +28,10 @@ sf::RenderWindow* const Engine::getWindow() {
     return &_window;
 }
 
+ResourceManager* const Engine::getResourceManager() {
+    return &_resourceManager;
+}
+
 void Engine::setScene(Scene* _scene) {
     if (this->_scene != nullptr) // Scene will be null at least the first time this method is called.
         delete this->_scene;

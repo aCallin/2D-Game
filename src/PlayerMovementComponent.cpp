@@ -1,14 +1,8 @@
-#include "PlayerManager.hpp"
+#include "PlayerMovementComponent.hpp"
 
-PlayerManager::PlayerManager() {
-    _player = nullptr;
-}
+const float PlayerMovementComponent::MoveSpeed = 5;
 
-void PlayerManager::setPlayer(Player* const player) {
-    _player = player;
-}
-
-void PlayerManager::update(const sf::RenderWindow& window) {
+void PlayerMovementComponent::handleMovement(sf::CircleShape* playerShape) {
     // Get the direction the player wants to move.
     sf::Vector2f moveDirection;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -28,16 +22,8 @@ void PlayerManager::update(const sf::RenderWindow& window) {
     }
 
     // Multiply the unit vector by the move speed to get the final move offset.
-    const float moveSpeed = 5.0f;
-    sf::Vector2f moveOffset(moveDirectionNormalized.x * moveSpeed, moveDirectionNormalized.y * moveSpeed);
+    sf::Vector2f moveOffset(moveDirectionNormalized.x * MoveSpeed, moveDirectionNormalized.y * MoveSpeed);
 
     // Apply movement.
-    _player->setPosition(_player->getPosition() + moveOffset);
-
-    // Get aim location.
-    _player->setAimLocation(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-}
-
-void PlayerManager::draw(sf::RenderWindow* const window) {
-    window->draw(_player->getCircle());
+    playerShape->move(moveOffset);
 }

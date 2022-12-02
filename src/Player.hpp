@@ -2,20 +2,23 @@
 #define PLAYER_HPP
 
 #include <SFML\Graphics.hpp>
+#include "PlayerMovementComponent.hpp"
+#include "PlayerShootingComponent.hpp"
 
 class Player {
 private:
-    sf::CircleShape _circle; // Temporary until there is a player texture.
-    sf::Vector2f _aimLocation;
+    static const float ShapeRadius;
+
+    sf::CircleShape _shape;
+    PlayerMovementComponent _movementComponent;
+    PlayerShootingComponent _shootingComponent;
 public:
     Player();
-    ~Player() = default;
 
-    const sf::CircleShape& getCircle() const;
     const sf::Vector2f& getPosition() const;
-    const sf::Vector2f& getAimLocation() const;
-    void setPosition(const sf::Vector2f& position);
-    void setAimLocation(const sf::Vector2f& aimLocation);
+    
+    void update(const sf::RenderWindow& window);
+    void draw(sf::RenderWindow* const window);
 };
 
 #endif

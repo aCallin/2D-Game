@@ -11,7 +11,8 @@ SRC = src/Main.cpp\
 	  src/PlayingScene.cpp\
 	  src/Terrain.cpp\
 	  src/Player.cpp\
-	  src/PlayerManager.cpp\
+	  src/PlayerMovementComponent.cpp\
+	  src/PlayerShootingComponent.cpp\
 	  src/Bullet.cpp
 OBJ = $(patsubst src/%.cpp,obj/%.o,$(SRC))
 

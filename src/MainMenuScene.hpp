@@ -1,6 +1,7 @@
 #ifndef MAIN_MENU_SCENE_HPP
 #define MAIN_MENU_SCENE_HPP
 
+#include <SFML\Graphics.hpp>
 #include <string>
 #include "Scene.hpp"
 #include "Button.hpp"
@@ -9,9 +10,10 @@
 
 class MainMenuScene : public Scene {
 private:
-    Button newGameButton;
-    Button optionsButton;
-    Button quitButton;
+    Button _newGameButton;
+    Button _optionsButton;
+    Button _quitButton;
+    sf::Sprite _backgroundSprite;
 public:
     MainMenuScene();
     virtual ~MainMenuScene() override;

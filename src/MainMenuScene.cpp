@@ -1,25 +1,31 @@
 #include "MainMenuScene.hpp"
 
 MainMenuScene::MainMenuScene() {
+    _engine->getResourceManager()->addTexture("main_menu_background.png", "main_menu_background");
     _engine->getResourceManager()->addTexture("button_new_game.png", "button_new_game");
     _engine->getResourceManager()->addTexture("button_options.png", "button_options");
     _engine->getResourceManager()->addTexture("button_quit.png", "button_quit");
 
+    // Background sprite.
+    const sf::Texture& backgroundTexture = *_engine->getResourceManager()->getTexture("main_menu_background");
+    _backgroundSprite.setTexture(backgroundTexture, true);
+
+    // Set button textures.
     const sf::Texture& newGameTexture = *_engine->getResourceManager()->getTexture("button_new_game");
     const sf::Texture& optionsTexture = *_engine->getResourceManager()->getTexture("button_options");
     const sf::Texture& quitTexture = *_engine->getResourceManager()->getTexture("button_quit");
-    newGameButton.setTextures(newGameTexture, newGameTexture, newGameTexture);
-    optionsButton.setTextures(optionsTexture, optionsTexture, optionsTexture);
-    quitButton.setTextures(quitTexture, quitTexture, quitTexture);
+    _newGameButton.setTextures(newGameTexture, newGameTexture, newGameTexture);
+    _optionsButton.setTextures(optionsTexture, optionsTexture, optionsTexture);
+    _quitButton.setTextures(quitTexture, quitTexture, quitTexture);
 
     // Position the buttons.
     sf::Vector2f buttonPosition(50, 130);
     const int yIncrement = 150;
-    newGameButton.setPosition(buttonPosition);
+    _newGameButton.setPosition(buttonPosition);
     buttonPosition.y += yIncrement;
-    optionsButton.setPosition(buttonPosition);
+    _optionsButton.setPosition(buttonPosition);
     buttonPosition.y += yIncrement;
-    quitButton.setPosition(buttonPosition);
+    _quitButton.setPosition(buttonPosition);
 }
 
 MainMenuScene::~MainMenuScene() {
@@ -30,22 +36,25 @@ MainMenuScene::~MainMenuScene() {
 
 void MainMenuScene::update() {
     // Update the buttons.
-    newGameButton.update(*_engine->getWindow());
-    optionsButton.update(*_engine->getWindow());
-    quitButton.update(*_engine->getWindow());
+    _newGameButton.update(*_engine->getWindow());
+    _optionsButton.update(*_engine->getWindow());
+    _quitButton.update(*_engine->getWindow());
 
     // Do button actions.
-    if (newGameButton.wasClicked())
+    if (_newGameButton.wasClicked())
         _engine->setScene(new PlayingScene());
-    if (optionsButton.wasClicked())
+    if (_optionsButton.wasClicked())
         _engine->setScene(new OptionsScene());
-    if (quitButton.wasClicked())
+    if (_quitButton.wasClicked())
         _engine->getWindow()->close();
 }
 
 void MainMenuScene::draw() {
+    // Draw the background.
+    _engine->getWindow()->draw(_backgroundSprite);
+
     // Draw the buttons.
-    newGameButton.draw(_engine->getWindow());
-    optionsButton.draw(_engine->getWindow());
-    quitButton.draw(_engine->getWindow());
+    _newGameButton.draw(_engine->getWindow());
+    _optionsButton.draw(_engine->getWindow());
+    _quitButton.draw(_engine->getWindow());
 }

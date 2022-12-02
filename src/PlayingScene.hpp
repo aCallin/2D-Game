@@ -6,6 +6,7 @@
 #include "Player.hpp"
 #include "PlayerController.hpp"
 #include "PlayerDrawer.hpp"
+#include "MainMenuScene.hpp"
 
 class PlayingScene : public Scene {
 private:

@@ -14,7 +14,7 @@ public:
 
     void setPlayer(Player* const player);
 
-    void update();
+    void update(const sf::RenderWindow& window);
 };
 
 #endif

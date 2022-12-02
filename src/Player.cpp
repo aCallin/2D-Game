@@ -16,6 +16,14 @@ const sf::Vector2f& Player::getPosition() const {
     return _circle.getPosition();
 }
 
+const sf::Vector2f& Player::getAimLocation() const {
+    return _aimLocation;
+}
+
 void Player::setPosition(const sf::Vector2f& position) {
     _circle.setPosition(position);
+}
+
+void Player::setAimLocation(const sf::Vector2f& aimLocation) {
+    _aimLocation = aimLocation;
 }

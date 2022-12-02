@@ -6,16 +6,19 @@ const std::string Engine::WindowTitle = "Unnamed Project";
 const sf::Vector2u Engine::InternalResolution = sf::Vector2u(1280, 720);
 const float Engine::TargetAspectRatio = (float)Engine::InternalResolution.x / Engine::InternalResolution.y;
 const unsigned int Engine::TargetFPS = 60;
+sf::Cursor Engine::DefaultCursor;
 
 Engine* const Engine::getInstance() {
-    if (Engine::_engine == nullptr)
-        Engine::_engine = new Engine();
-    return Engine::_engine;
+    if (_engine == nullptr)
+        _engine = new Engine();
+    return _engine;
 }
 
 Engine::Engine() {
+    Engine::DefaultCursor.loadFromSystem(sf::Cursor::Arrow);
     _window.create(sf::VideoMode(InternalResolution.x, InternalResolution.y), WindowTitle);
     _window.setFramerateLimit(TargetFPS);
+    _window.setMouseCursor(DefaultCursor);
     _scene = nullptr;
 }
 

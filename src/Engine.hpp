@@ -27,6 +27,7 @@ public:
     static const sf::Vector2u InternalResolution;
     static const float TargetAspectRatio;
     static const unsigned int TargetFPS;
+    static sf::Cursor DefaultCursor;
 
     ~Engine();
     Engine(const Engine& other) = delete;

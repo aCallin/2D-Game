@@ -1,20 +1,20 @@
-#ifndef PLAYER_CONTROLL_HPP
-#define PLAYER_CONTROLL_HPP
+#ifndef PLAYER_MANAGER_HPP
+#define PLAYER_MANAGER_HPP
 
 #include <SFML\Graphics.hpp>
 #include <cmath>
 #include "Player.hpp"
 
-class PlayerController {
+class PlayerManager {
 private:
     Player* _player;
 public:
-    PlayerController() = default;
-    ~PlayerController() = default;
+    PlayerManager();
 
     void setPlayer(Player* const player);
 
     void update(const sf::RenderWindow& window);
+    void draw(sf::RenderWindow* const window);
 };
 
 #endif

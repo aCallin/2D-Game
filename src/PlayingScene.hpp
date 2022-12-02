@@ -4,16 +4,14 @@
 #include "Scene.hpp"
 #include "Terrain.hpp"
 #include "Player.hpp"
-#include "PlayerController.hpp"
-#include "PlayerDrawer.hpp"
+#include "PlayerManager.hpp"
 #include "MainMenuScene.hpp"
 
 class PlayingScene : public Scene {
 private:
     Terrain _terrain;
     Player _player;
-    PlayerController _playerController;
-    PlayerDrawer _playerDrawer;
+    PlayerManager _playerManager;
 public:
     PlayingScene();
     virtual ~PlayingScene() override;

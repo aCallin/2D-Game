@@ -2,15 +2,12 @@
 
 PlayingScene::PlayingScene() {
     _terrain.load(_engine->getResourceManager());
-    _playerDrawer.load(_engine->getResourceManager(), _engine->getWindow());
-
-    _playerController.setPlayer(&_player);
-    _playerDrawer.setPlayer(&_player);
+    
+    _playerManager.setPlayer(&_player);
 }
 
 PlayingScene::~PlayingScene() {
     _terrain.deload(_engine->getResourceManager());
-    _playerDrawer.deload(_engine->getResourceManager(), _engine->getWindow(), Engine::DefaultCursor);
 
     // Reset the camera's center.
     sf::View view = _engine->getWindow()->getView();
@@ -20,7 +17,7 @@ PlayingScene::~PlayingScene() {
 
 void PlayingScene::update() {
     // Update the player.
-    _playerController.update(*_engine->getWindow());
+    _playerManager.update(*_engine->getWindow());
 
     // Center the camera on the player.
     sf::View view = _engine->getWindow()->getView();
@@ -40,5 +37,5 @@ void PlayingScene::draw() {
     _terrain.draw(_engine->getWindow());
 
     // Draw the player.
-    _playerDrawer.draw(_engine->getWindow());
+    _playerManager.draw(_engine->getWindow());
 }

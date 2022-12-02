@@ -1,10 +1,14 @@
-#include "PlayerController.hpp"
+#include "PlayerManager.hpp"
 
-void PlayerController::setPlayer(Player* const player) {
+PlayerManager::PlayerManager() {
+    _player = nullptr;
+}
+
+void PlayerManager::setPlayer(Player* const player) {
     _player = player;
 }
 
-void PlayerController::update(const sf::RenderWindow& window) {
+void PlayerManager::update(const sf::RenderWindow& window) {
     // Get the direction the player wants to move.
     sf::Vector2f moveDirection;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -32,4 +36,8 @@ void PlayerController::update(const sf::RenderWindow& window) {
 
     // Get aim location.
     _player->setAimLocation(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+}
+
+void PlayerManager::draw(sf::RenderWindow* const window) {
+    window->draw(_player->getCircle());
 }

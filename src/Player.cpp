@@ -1,7 +1,7 @@
 #include "Player.hpp"
 
 Player::Player() {
-    const float radius = 50.0f;
+    const float radius = 30.0f;
     _circle.setPosition(sf::Vector2f(0, 0));
     _circle.setRadius(radius);
     _circle.setOrigin(sf::Vector2f(radius, radius));

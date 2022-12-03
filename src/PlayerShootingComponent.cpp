@@ -1,17 +1,21 @@
 #include "PlayerShootingComponent.hpp"
 
-const int PlayerShootingComponent::Firerate = 5;
+const float PlayerShootingComponent::ShotSpeed = 30;
+const float PlayerShootingComponent::ShotRadius = 10;
+const sf::Color PlayerShootingComponent::ShotColor = sf::Color::Green;
+const int PlayerShootingComponent::ShotDelay = 5;
 
 PlayerShootingComponent::PlayerShootingComponent() {
     _recharge = 0;
     _canFire = true;
 }
 
-void PlayerShootingComponent::handleShooting(const sf::RenderWindow& window, const sf::Vector2f& playerCenter) {
-    // Recharge shot and check if the player can shoot.
+void PlayerShootingComponent::handleShooting(const sf::RenderWindow& window, const sf::Vector2f& playerCenter, 
+                                             BulletManager* const bulletManager) {
+    // Recharge shot if the player can't shoot yet.
     if (!_canFire) {
         _recharge++;
-        if( _recharge == Firerate) {
+        if( _recharge >= ShotDelay) {
             _canFire = true;
             _recharge = 0;
         }
@@ -19,10 +23,17 @@ void PlayerShootingComponent::handleShooting(const sf::RenderWindow& window, con
 
     // Shoot.
     if (_canFire && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-        sf::Vector2f aimLocation = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+        // Calculate aim direction unit vector.
+        sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+        sf::Vector2f aimDirection = mousePosition - playerCenter;
+        if (aimDirection.x != 0 || aimDirection.y != 0) {
+            float aimDistance = sqrtf((aimDirection.x * aimDirection.x) + (aimDirection.y * aimDirection.y));
+            aimDirection.x = aimDirection.x / aimDistance;
+            aimDirection.y = aimDirection.y / aimDistance;
+        }
 
-        // TODO: Actually fire a bullet.
-
+        // Fire a bullet.
+        bulletManager->addBullet(new Bullet(playerCenter, aimDirection, ShotSpeed, ShotRadius, ShotColor, player));
         _canFire = false;
     }
 }

@@ -19,7 +19,7 @@ PlayingScene::~PlayingScene() {
 
 void PlayingScene::update() {
     // Update the player.
-    _player.update(*_engine->getWindow());
+    _player.update(*_engine->getWindow(), &_bulletManager);
 
     // Center the view on the player.
     sf::View view = _engine->getWindow()->getView();
@@ -29,6 +29,11 @@ void PlayingScene::update() {
     // Update the terrain.
     _terrain.update(view.getCenter(), Engine::InternalResolution);
 
+    // TODO: update enemies.
+
+    // Update bullets.
+    _bulletManager.update();
+
     // Return to the main menu on pressing Escape. Keep last.
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         _engine->setScene(new MainMenuScene());
@@ -37,6 +42,9 @@ void PlayingScene::update() {
 void PlayingScene::draw() {
     // Draw the terrain.
     _terrain.draw(_engine->getWindow());
+
+    // Draw bullets.
+    _bulletManager.draw(_engine->getWindow());
 
     // Draw the player.
     _player.draw(_engine->getWindow());

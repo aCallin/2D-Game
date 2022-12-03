@@ -4,6 +4,7 @@
 #include "Scene.hpp"
 #include "Terrain.hpp"
 #include "Player.hpp"
+#include "BulletManager.hpp"
 #include "MainMenuScene.hpp"
 
 class PlayingScene : public Scene {
@@ -11,6 +12,7 @@ private:
     sf::Vector2f _previousViewCenter;
     Terrain _terrain;
     Player _player;
+    BulletManager _bulletManager;
 public:
     PlayingScene();
     virtual ~PlayingScene() override;

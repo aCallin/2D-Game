@@ -13,9 +13,9 @@ const sf::Vector2f& Player::getPosition() const {
     return _shape.getPosition();
 }
 
-void Player::update(const sf::RenderWindow& window) {
+void Player::update(const sf::RenderWindow& window, BulletManager* const bulletManager) {
     _movementComponent.handleMovement(&_shape);
-    _shootingComponent.handleShooting(window, _shape.getPosition());
+    _shootingComponent.handleShooting(window, _shape.getPosition(), bulletManager);
 }
 
 void Player::draw(sf::RenderWindow* const window) {

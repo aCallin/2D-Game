@@ -14,7 +14,9 @@ SRC = src/Main.cpp\
 	  src/PlayerMovementComponent.cpp\
 	  src/PlayerShootingComponent.cpp\
 	  src/Bullet.cpp\
-	  src/BulletManager.cpp
+	  src/BulletManager.cpp\
+	  src/Spiderling.cpp\
+	  src/SpiderlingMovementComponent.cpp
 OBJ = $(patsubst src/%.cpp,obj/%.o,$(SRC))
 
 INCLUDES = -I"SFML-2.5.1/include"

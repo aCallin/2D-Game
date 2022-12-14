@@ -3,7 +3,7 @@
 const float PlayerShootingComponent::ShotSpeed = 30;
 const float PlayerShootingComponent::ShotRadius = 10;
 const sf::Color PlayerShootingComponent::ShotColor = sf::Color::Green;
-const int PlayerShootingComponent::ShotDelay = 5;
+const int PlayerShootingComponent::ShotDelay = 30;
 
 PlayerShootingComponent::PlayerShootingComponent() {
     _recharge = 0;

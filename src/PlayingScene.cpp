@@ -1,7 +1,8 @@
 #include "PlayingScene.hpp"
 
 PlayingScene::PlayingScene() {
-    _previousViewCenter = _engine->getWindow()->getView().getCenter();
+    // Store the current state of the view before we center it on the player.
+    _previousViewState = _engine->getWindow()->getView();
 
     // Load resources.
     _terrain.load(_engine->getResourceManager());
@@ -11,10 +12,8 @@ PlayingScene::~PlayingScene() {
     // Deload resources.
     _terrain.deload(_engine->getResourceManager());
 
-    // Reset the view's center.
-    sf::View view = _engine->getWindow()->getView();
-    view.setCenter(_previousViewCenter);
-    _engine->getWindow()->setView(view);
+    // Reset the view.
+    _engine->getWindow()->setView(_previousViewState);
 }
 
 void PlayingScene::update() {
@@ -29,10 +28,11 @@ void PlayingScene::update() {
     // Update the terrain.
     _terrain.update(view.getCenter(), Engine::InternalResolution);
 
-    // TODO: update enemies.
+    // Update enemies.
+    _enemyManager.update(_player.getPosition());
 
-    // Update bullets.
-    _bulletManager.update();
+    // Update bullet manager.
+    _bulletManager.update(_enemyManager.getEnemies());
 
     // Return to the main menu on pressing Escape. Keep last.
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
@@ -48,4 +48,7 @@ void PlayingScene::draw() {
 
     // Draw the player.
     _player.draw(_engine->getWindow());
+
+    // Draw enemies.
+    _enemyManager.draw(_engine->getWindow());
 }

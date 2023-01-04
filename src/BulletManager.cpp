@@ -12,14 +12,17 @@ void BulletManager::addBullet(Bullet* const bullet) {
     _bullets.push_back(bullet);
 }
 
-void BulletManager::update() {
+void BulletManager::update(const std::vector<Enemy*>& enemies) {
     for (int i = _bullets.size() - 1; i >= 0; i--) {
         Bullet* const bullet = _bullets[i];
+
+        // Increase age of the bullet. Delete bullet if it has exceeded its lifespan.
         bullet->setAge(bullet->getAge() + 1);
-        if (bullet->getAge() == BulletLifespan) {
+        if (bullet->getAge() >= BulletLifespan) {
             _bullets.erase(_bullets.begin() + i);
             delete bullet;
         } else {
+            // Move the bullet in its current direction.
             sf::Vector2f moveOffset = bullet->getDirection();
             moveOffset.x *= bullet->getSpeed();
             moveOffset.y *= bullet->getSpeed();

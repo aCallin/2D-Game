@@ -1,23 +1,27 @@
 #include "EnemyManager.hpp"
 
 EnemyManager::EnemyManager() {
-    _spiderlings.push_back(new Spiderling(sf::Vector2f(100, 100)));
-    _spiderlings.push_back(new Spiderling(sf::Vector2f(200, 100)));
-    _spiderlings.push_back(new Spiderling(sf::Vector2f(300, 400)));
+    _enemies.push_back(new Enemy(sf::Vector2f(100, 100)));
+    _enemies.push_back(new Enemy(sf::Vector2f(200, 100)));
+    _enemies.push_back(new Enemy(sf::Vector2f(300, 400)));
+}
+
+const std::vector<Enemy*>& EnemyManager::getEnemies() const {
+    return _enemies;
 }
 
 void EnemyManager::update(const sf::Vector2f& targetPosition) {
-    for (int i = _spiderlings.size() - 1; i >= 0; i--) {
-        Spiderling* currentSpiderling = _spiderlings[i];
-        if (currentSpiderling->getHealth() <= 0) {
-            _spiderlings.erase(_spiderlings.begin() + i);
-            delete currentSpiderling;
+    for (int i = _enemies.size() - 1; i >= 0; i--) {
+        Enemy* currentEnemy = _enemies[i];
+        if (currentEnemy->getHealth() <= 0) {
+            _enemies.erase(_enemies.begin() + i);
+            delete currentEnemy;
         } else
-            _spiderlings[i]->update(targetPosition);
+            _enemies[i]->update(targetPosition);
     }
 }
 
 void EnemyManager::draw(sf::RenderWindow* const window) {
-    for (int i = 0; i < _spiderlings.size(); i++)
-        _spiderlings[i]->draw(window);
+    for (int i = 0; i < _enemies.size(); i++)
+        _enemies[i]->draw(window);
 }

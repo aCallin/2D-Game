@@ -50,6 +50,7 @@ void BulletManager::update(const std::vector<Enemy*>& enemies) {
                     enemies[j]->setHealth(enemies[j]->getHealth() - 1);
                     _bullets.erase(_bullets.begin() + i);
                     delete bullet;
+                    break; // Don't check for more collisions after the bullet has been deleted.
                 }
             }
         }

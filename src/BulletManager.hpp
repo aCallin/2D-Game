@@ -3,6 +3,7 @@
 
 #include <SFML\Graphics.hpp>
 #include <vector>
+#include <cmath>
 #include "Bullet.hpp"
 #include "Enemy.hpp"
 
@@ -11,6 +12,8 @@ private:
     const static int BulletLifespan;
 
     std::vector<Bullet*> _bullets;
+
+    bool collides(const sf::CircleShape& bulletShape, const sf::CircleShape& targetShape) const;
 public:
     ~BulletManager();
 

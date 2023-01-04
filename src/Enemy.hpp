@@ -16,6 +16,7 @@ private:
 public:
     Enemy(const sf::Vector2f& position);
 
+    const sf::CircleShape& getShape() const;
     int getHealth() const;
 
     void setHealth(int health);

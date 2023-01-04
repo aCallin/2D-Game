@@ -11,6 +11,10 @@ Enemy::Enemy(const sf::Vector2f& position) {
     _health = MaxHealth;
 }
 
+const sf::CircleShape& Enemy::getShape() const {
+    return _shape;
+}
+
 int Enemy::getHealth() const {
     return _health;
 }
